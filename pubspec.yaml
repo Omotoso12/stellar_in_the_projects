@@ -39,8 +39,8 @@ dependencies:
   #external plugins
   
   flutter_riverpod: ^2.5.3
-  word_search_safety: ^0.1.2-nullsafety.1
   equatable: ^2.0.5
+  flutter_native_splash: ^2.4.2
 
 dev_dependencies:
   flutter_test:
@@ -80,12 +80,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: Artemotion
+      fonts:
+        - asset: fonts/Artemotion-Regular.ttf
+
+        # - asset: fonts/Schyler-Italic.ttf
+        #   style: italic
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

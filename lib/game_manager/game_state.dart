@@ -1,26 +1,27 @@
 part of "game_controller.dart";
 
+// ignore: must_be_immutable
 class GameState extends Equatable {
-  final String email;
+  List<int> indexList;
   final String password;
   final bool status;
   final String? errorMessage;
 
-  const GameState({ 
-    this.email = '',
+  GameState({ 
+    required this.indexList,
     this.password = '',
     this.status = false,
     this.errorMessage,
   });
 
   GameState copyWith({
-    String? email,
+    List<int>? indexList,
     String? password,
     bool? status,
     String? errorMessage,
   }) {
     return GameState(
-      email: email ?? this.email,
+      indexList: indexList ?? this.indexList,
       password: password ?? this.password,
       status: status ?? this.status,
       errorMessage: errorMessage ?? this.errorMessage,
@@ -29,7 +30,7 @@ class GameState extends Equatable {
 
   @override
   List<Object?> get props => [
-        email,
+        indexList,
         password,
         status,
       ];
