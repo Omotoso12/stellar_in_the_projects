@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stellar_in_the_project/game_manager/game_answers.dart';
 import 'package:stellar_in_the_project/game_manager/game_controller.dart';
 import 'package:stellar_in_the_project/game_manager/game_letters.dart';
 
@@ -29,6 +30,9 @@ class _InterfaceState extends ConsumerState<Interface> {
           Align(
             alignment: AlignmentDirectional.topCenter,
             child: GestureDetector(
+              onPanStart: (details) {
+                gameControl.setIndexListToEmpty();
+              },
               onPanUpdate: (details) {
                 setState(() {
                   nameXY = details.localPosition;
@@ -39,46 +43,63 @@ class _InterfaceState extends ConsumerState<Interface> {
                       nameXY.dx);
                 });
               },
-              onPanCancel: () {
-                gameControl.setIndexListToEmpty();
+              onPanEnd: (details) {
+              gameControl.getCorrectAnswer(allAnswers, ref.read(gameControlProvider).indexList);           
               },
-              child: Container(
+              child: SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.8,
                 width: MediaQuery.sizeOf(context).width * 0.98,
-                decoration: const BoxDecoration(color: Colors.red),
-                child: SizedBox(
-                  height: MediaQuery.sizeOf(context).height * 0.8,
-                  width: MediaQuery.sizeOf(context).width * 0.98,
-                  child: GridView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent:
-                              (MediaQuery.sizeOf(context).width * 0.98) / 12,
-                          mainAxisExtent:
-                              (MediaQuery.sizeOf(context).height * 0.75) / 12,
-                          childAspectRatio: 1,
-                          crossAxisSpacing: 0,
-                          mainAxisSpacing: 0),
-                      itemCount: gameAlphabets.length,
-                      itemBuilder: (BuildContext ctx, index) {
-                        return Container(
-                          width: 10,
-                          height: 10,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: Colors.amber,
-                              border: Border.all(
-                                color: Colors.black,
-                              )),
-                          child: Text(gameAlphabets[index]),
-                        );
-                      }),
-                ),
+                child: GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent:
+                            (MediaQuery.sizeOf(context).width * 0.98) / 12,
+                        mainAxisExtent:
+                            (MediaQuery.sizeOf(context).height * 0.8) / 22,
+                        childAspectRatio: 1,
+                        crossAxisSpacing: 0,
+                        mainAxisSpacing: 0),
+                    itemCount: gameAlphabets.length,
+                    itemBuilder: (BuildContext ctx, index) {
+                      return Container(
+                        width: 10,
+                        height: 10,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                              color: Colors.black,
+                            )),
+                        child: Text(
+                          gameAlphabets[index].toUpperCase(),
+                          style: const TextStyle(
+                              fontFamily: 'Artemotion',
+                              fontSize: 32,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      );
+                    }),
               ),
             ),
           ),
-          Text(
-            '$nameXY, ${ref.watch(gameControlProvider).indexList})',
+          Container(
+            color: Colors.blue,
+            height: MediaQuery.sizeOf(context).height * 0.15 ,
+            width: MediaQuery.sizeOf(context).width,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+
+                  ],
+                ),
+                Center(
+                  child: Text(
+                    '$nameXY, ${ref.watch(gameControlProvider).indexList}, ${ref.watch(gameControlProvider).markAnswer})',
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       )),

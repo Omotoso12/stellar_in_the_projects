@@ -83,7 +83,7 @@ flutter:
   fonts:
     - family: Artemotion
       fonts:
-        - asset: fonts/Artemotion-Regular.ttf
+        - asset: assets/fonts/Artemotion-Regular.ttf
 
         # - asset: fonts/Schyler-Italic.ttf
         #   style: italic
