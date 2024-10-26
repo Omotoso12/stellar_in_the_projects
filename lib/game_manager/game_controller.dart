@@ -86,6 +86,14 @@ class GameController extends StateNotifier<GameState> {
   }
 
   getCorrectAnswer(List<List<int>> answerList, List<int> confirmAnswer) {
+    List<int> diagonalCheck = answerList.elementAt(7);
+    List<int> diagonalCheck1 = answerList.elementAt(9);
+    if(diagonalCheck.first == confirmAnswer.first && diagonalCheck.last == confirmAnswer.last ) {
+      state.markAnswer[7] = true;
+    }
+    if(diagonalCheck1.first == confirmAnswer.first && diagonalCheck1.last == confirmAnswer.last ) {
+      state.markAnswer[9] = true;
+    }
     for (var i = 0; i < 11; i++ ){
       if (listEquals(answerList.elementAt(i), confirmAnswer)) {
         state.markAnswer[i] = true;

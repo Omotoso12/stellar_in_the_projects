@@ -4,7 +4,7 @@ const List<String> gameAlphabets = [
   'b',
   'r',
   'l',
-  'v',
+  'u',
   'f',
   'r',
   'o',
@@ -31,7 +31,7 @@ const List<String> gameAlphabets = [
   'e',
   'o',
   'y',
-  'y',
+  't',
   'j',
   'k',
   'i',
@@ -263,4 +263,18 @@ const List<String> gameAlphabets = [
   'v',
   'g',
   'p',
+];
+
+const List<String> gameWords = [
+  'ahshit',
+  'amazing',
+  'bandboy',
+  'blacktopia',
+  'colorful',
+  'in',
+  'newbalance',
+  'projects',
+  'pwa',
+  'stellar',
+  'ywrr'
 ];
