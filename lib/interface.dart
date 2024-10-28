@@ -4,6 +4,7 @@ import 'package:stellar_in_the_project/game_manager/game_answers.dart';
 import 'package:stellar_in_the_project/game_manager/game_controller.dart';
 import 'package:stellar_in_the_project/game_manager/game_letters.dart';
 import 'package:stellar_in_the_project/game_ui/answers_ui.dart';
+import 'package:stellar_in_the_project/game_ui/shade_answers.dart';
 
 class Interface extends ConsumerStatefulWidget {
   const Interface({super.key});
@@ -52,53 +53,95 @@ class _InterfaceState extends ConsumerState<Interface> {
                 gameControl.getCorrectAnswer(
                     allAnswers, ref.read(gameControlProvider).indexList);
               },
-              child: Container(
-                decoration: const BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border(
-                        top: BorderSide(
-                            style: BorderStyle.solid, color: Colors.black),
-                        bottom: BorderSide(
-                            style: BorderStyle.solid, color: Colors.black),
-                        right: BorderSide(color: Colors.black))),
+              child: SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.8,
                 width: MediaQuery.sizeOf(context).width * 0.98,
-                child: GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent:
-                            (MediaQuery.sizeOf(context).width * 0.98) / 12,
-                        mainAxisExtent:
-                            (MediaQuery.sizeOf(context).height * 0.8) / 22,
-                        childAspectRatio: 1,
-                        crossAxisSpacing: 0,
-                        mainAxisSpacing: 0),
-                    itemCount: gameAlphabets.length,
-                    itemBuilder: (BuildContext ctx, index) {
-                      return Container(
-                        width: 10,
-                        height: 10,
-                        alignment: Alignment.center,
-                        decoration: const BoxDecoration(
-                            color: Colors.transparent,
-                            border: Border(
-                                bottom: BorderSide(color: Colors.black),
-                                left: BorderSide(color: Colors.black))),
-                        child: SizedBox(
-                          width: (MediaQuery.sizeOf(context).width * 0.98) / 14,
-                          height:
-                              (MediaQuery.sizeOf(context).height * 0.8) / 24,
-                          child: FittedBox(
-                            child: Text(
-                              gameAlphabets[index].toUpperCase(),
-                              style: const TextStyle(
-                                  fontFamily: 'Artemotion',
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
+                child: Stack(
+                  children: [
+                    ShadeAnswers(
+                        showShade1:
+                            ref.watch(gameControlProvider).markAnswer[0],
+                        showShade2:
+                            ref.watch(gameControlProvider).markAnswer[1],
+                        showShade3:
+                            ref.watch(gameControlProvider).markAnswer[2],
+                        showShade4:
+                            ref.watch(gameControlProvider).markAnswer[3],
+                        showShade5:
+                            ref.watch(gameControlProvider).markAnswer[4],
+                        showShade6:
+                            ref.watch(gameControlProvider).markAnswer[5],
+                        showShade7:
+                            ref.watch(gameControlProvider).markAnswer[6],
+                        showShade8:
+                            ref.watch(gameControlProvider).markAnswer[7],
+                        showShade9:
+                            ref.watch(gameControlProvider).markAnswer[8],
+                        showShade10:
+                            ref.watch(gameControlProvider).markAnswer[9],
+                        showShade11:
+                            ref.watch(gameControlProvider).markAnswer[10]),
+                    Container(
+                      decoration: const BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border(
+                              top: BorderSide(
+                                  style: BorderStyle.solid,
+                                  color: Colors.black),
+                              bottom: BorderSide(
+                                  style: BorderStyle.solid,
+                                  color: Colors.black),
+                              right: BorderSide(color: Colors.black))),
+                      height: MediaQuery.sizeOf(context).height * 0.8,
+                      width: MediaQuery.sizeOf(context).width * 0.98,
+                      child: GridView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent:
+                                      (MediaQuery.sizeOf(context).width *
+                                              0.98) /
+                                          12,
+                                  mainAxisExtent:
+                                      (MediaQuery.sizeOf(context).height *
+                                              0.8) /
+                                          22,
+                                  childAspectRatio: 1,
+                                  crossAxisSpacing: 0,
+                                  mainAxisSpacing: 0),
+                          itemCount: gameAlphabets.length,
+                          itemBuilder: (BuildContext ctx, index) {
+                            return Container(
+                              width: 10,
+                              height: 10,
+                              alignment: Alignment.center,
+                              decoration: const BoxDecoration(
+                                  color: Colors.transparent,
+                                  border: Border(
+                                      bottom: BorderSide(color: Colors.black),
+                                      left: BorderSide(color: Colors.black))),
+                              child: SizedBox(
+                                width:
+                                    (MediaQuery.sizeOf(context).width * 0.98) /
+                                        14,
+                                height:
+                                    (MediaQuery.sizeOf(context).height * 0.8) /
+                                        24,
+                                child: FittedBox(
+                                  child: Text(
+                                    gameAlphabets[index].toUpperCase(),
+                                    style: const TextStyle(
+                                        fontFamily: 'Artemotion',
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }),
+                    ),
+                    
+                  ],
+                ),
               ),
             ),
           ),

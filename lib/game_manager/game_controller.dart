@@ -10,13 +10,17 @@ final gameControlProvider =
 );
 
 class GameController extends StateNotifier<GameState> {
-  GameController() : super(GameState(indexList: List<int>.empty(growable: true), markAnswer:List<bool>.filled(11, false)));
+  GameController()
+      : super(GameState(
+            indexList: List<int>.empty(growable: true),
+            markAnswer: List<bool>.filled(11, false)));
 
   setIndexListToEmpty() {
     state = state.copyWith(indexList: List<int>.empty(growable: true));
   }
 
-  calculateIntersctionPoints( double tHeight, double tWidth, double boxSetHeight, double boxSetWidth) {
+  calculateIntersctionPoints(
+      double tHeight, double tWidth, double boxSetHeight, double boxSetWidth) {
     double boxWidth = tWidth * 0.98;
     double boxHeight = tHeight * 0.8;
 
@@ -86,15 +90,23 @@ class GameController extends StateNotifier<GameState> {
   }
 
   getCorrectAnswer(List<List<int>> answerList, List<int> confirmAnswer) {
-    List<int> diagonalCheck = answerList.elementAt(7);
-    List<int> diagonalCheck1 = answerList.elementAt(9);
-    if(diagonalCheck.first == confirmAnswer.first && diagonalCheck.last == confirmAnswer.last ) {
+    List<int> diagonalCheck = answerList.elementAt(5);
+    List<int> diagonalCheck1 = answerList.elementAt(7);
+    List<int> diagonalCheck2 = answerList.elementAt(9);
+    if (diagonalCheck.first == confirmAnswer.first &&
+        diagonalCheck.last == confirmAnswer.last) {
+      state.markAnswer[5] = true;
+    }
+
+    if (diagonalCheck1.first == confirmAnswer.first &&
+        diagonalCheck1.last == confirmAnswer.last) {
       state.markAnswer[7] = true;
     }
-    if(diagonalCheck1.first == confirmAnswer.first && diagonalCheck1.last == confirmAnswer.last ) {
+    if (diagonalCheck2.first == confirmAnswer.first &&
+        diagonalCheck2.last == confirmAnswer.last) {
       state.markAnswer[9] = true;
     }
-    for (var i = 0; i < 11; i++ ){
+    for (var i = 0; i < 11; i++) {
       if (listEquals(answerList.elementAt(i), confirmAnswer)) {
         state.markAnswer[i] = true;
       }
