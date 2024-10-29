@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'game_manager/constants.dart';
+
 class TextMarkerFormat extends StatelessWidget {
   final double sWidth;
   final double sHeight;
@@ -17,7 +19,7 @@ class TextMarkerFormat extends StatelessWidget {
         children: [
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.03,
-          width: MediaQuery.sizeOf(context).width / 7,
+          width: screenWidth / 7,
           child: FittedBox(
             alignment: Alignment.centerLeft,
             child: Text(

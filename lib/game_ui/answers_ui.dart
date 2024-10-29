@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../game_manager/constants.dart';
 import '../game_manager/game_letters.dart';
 import '../text_marker_format.dart';
 
@@ -37,7 +38,7 @@ class AnswersUi extends StatelessWidget {
     return SizedBox(
       //color: Colors.blue,
       height: MediaQuery.sizeOf(context).height * 0.13,
-      width: MediaQuery.sizeOf(context).width,
+      width: screenWidth,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [

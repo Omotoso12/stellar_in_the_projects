@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stellar_in_the_project/game_manager/constants.dart';
 import 'package:stellar_in_the_project/game_manager/game_answers.dart';
 import 'package:stellar_in_the_project/game_manager/game_controller.dart';
 import 'package:stellar_in_the_project/game_manager/game_letters.dart';
@@ -25,7 +26,7 @@ class _InterfaceState extends ConsumerState<Interface> {
   @override
   Widget build(BuildContext context) {
     final gameControl = ref.read(gameControlProvider.notifier);
-    final double sWidth = MediaQuery.sizeOf(context).width / 4.5;
+    final double sWidth = screenWidth / 4.5;
     final double sHeight = MediaQuery.sizeOf(context).height * 0.04;
 
     return Scaffold(
@@ -44,18 +45,21 @@ class _InterfaceState extends ConsumerState<Interface> {
                   nameXY = details.localPosition;
                   gameControl.calculateIntersctionPoints(
                       MediaQuery.sizeOf(context).height,
-                      MediaQuery.sizeOf(context).width,
+                      screenWidth,
                       nameXY.dy,
                       nameXY.dx);
                 });
               },
               onPanEnd: (details) {
-                gameControl.getCorrectAnswer(
+                setState(() {
+                  gameControl.getCorrectAnswer(
                     allAnswers, ref.read(gameControlProvider).indexList);
+                });
+                
               },
               child: SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.8,
-                width: MediaQuery.sizeOf(context).width * 0.98,
+                width: screenWidth,
                 child: Stack(
                   children: [
                     ShadeAnswers(
@@ -93,15 +97,12 @@ class _InterfaceState extends ConsumerState<Interface> {
                                   color: Colors.black),
                               right: BorderSide(color: Colors.black))),
                       height: MediaQuery.sizeOf(context).height * 0.8,
-                      width: MediaQuery.sizeOf(context).width * 0.98,
+                      width: screenWidth,
                       child: GridView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           gridDelegate:
                               SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent:
-                                      (MediaQuery.sizeOf(context).width *
-                                              0.98) /
-                                          12,
+                                  maxCrossAxisExtent: (screenWidth) / 12,
                                   mainAxisExtent:
                                       (MediaQuery.sizeOf(context).height *
                                               0.8) /
@@ -121,9 +122,7 @@ class _InterfaceState extends ConsumerState<Interface> {
                                       bottom: BorderSide(color: Colors.black),
                                       left: BorderSide(color: Colors.black))),
                               child: SizedBox(
-                                width:
-                                    (MediaQuery.sizeOf(context).width * 0.98) /
-                                        14,
+                                width: (screenWidth) / 14,
                                 height:
                                     (MediaQuery.sizeOf(context).height * 0.8) /
                                         24,
@@ -139,7 +138,6 @@ class _InterfaceState extends ConsumerState<Interface> {
                             );
                           }),
                     ),
-                    
                   ],
                 ),
               ),

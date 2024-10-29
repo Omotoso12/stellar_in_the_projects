@@ -21,7 +21,7 @@ class GameController extends StateNotifier<GameState> {
 
   calculateIntersctionPoints(
       double tHeight, double tWidth, double boxSetHeight, double boxSetWidth) {
-    double boxWidth = tWidth * 0.98;
+    double boxWidth = tWidth;
     double boxHeight = tHeight * 0.8;
 
     double tileWidth = boxWidth / 12;
